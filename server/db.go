@@ -1,14 +1,29 @@
-package dal
+package server
 
 import (
 	"github.com/XuryaX/card-dec-go/internal/models"
 	"github.com/XuryaX/card-dec-go/internal/settings"
-
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
-func SetupDatabase(config settings.DatabaseConfig) *gorm.DB {
+func setupDB() *gorm.DB {
+	db_settings := settings.GetDatabaseConfig()
+	database := setupDatabase(db_settings)
+	return database
+}
+
+func migrateDB() *gorm.DB {
+	db_settings := settings.GetDatabaseConfig()
+	database := setupDatabase(db_settings)
+
+	// Migrate the schema
+	database.AutoMigrate(&models.Deck{})
+
+	return database
+}
+
+func setupDatabase(config settings.DatabaseConfig) *gorm.DB {
 	var dialector gorm.Dialector
 
 	switch config.Driver {
@@ -22,9 +37,6 @@ func SetupDatabase(config settings.DatabaseConfig) *gorm.DB {
 	if err != nil {
 		panic("failed to connect to the database")
 	}
-
-	// Migrate the schema
-	db.AutoMigrate(&models.Deck{})
 
 	return db
 }

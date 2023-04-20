@@ -16,7 +16,8 @@ var Values = []string{"ACE", "2", "3", "4", "5", "6", "7", "8", "9", "10", "JACK
 
 // ParseCardCode parses a card code (e.g. "AS", "10H") and returns its value and suit.
 func ParseCardCode(cardCode string) (value string, suit string) {
-	if len(cardCode) != 2 {
+
+	if len(cardCode) != 2 && !(string(cardCode[0]) == "1" && len(cardCode) == 3) {
 		return "", ""
 	}
 
@@ -28,16 +29,15 @@ func ParseCardCode(cardCode string) (value string, suit string) {
 		suit = string(cardCode[2])
 	}
 
-	return value, suit
+	return value, GetSuitFromInitial(suit)
 }
 
 // NewDeck creates a new deck with the specified shuffling and cards parameters.
 func NewDeck(shuffled bool, cardsParam string) *models.Deck {
 	deck := &models.Deck{
-		ID:        uuid.New().String(),
-		Shuffled:  shuffled,
-		Remaining: 0,
-		Cards:     []models.Card{},
+		ID:       uuid.New().String(),
+		Shuffled: shuffled,
+		Cards:    []models.Card{},
 	}
 
 	if cardsParam == "" {
@@ -57,8 +57,6 @@ func NewDeck(shuffled bool, cardsParam string) *models.Deck {
 			}
 		}
 	}
-
-	deck.Remaining = len(deck.Cards)
 
 	if shuffled {
 		rand.Shuffle(len(deck.Cards), func(i, j int) {

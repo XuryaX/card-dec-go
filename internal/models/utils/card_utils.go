@@ -13,6 +13,16 @@ func NewCard(value, suit string) models.Card {
 	}
 }
 
+func GetSuitFromInitial(initial string) string {
+	dict := map[string]string{
+		"S": "SPADES",
+		"D": "DIAMONDS",
+		"C": "CLUBS",
+		"H": "HEARTS"}
+
+	return dict[initial]
+}
+
 // IsValidSuit checks if a given suit is valid.
 func IsValidSuit(suit string) bool {
 	validSuits := []string{"SPADES", "DIAMONDS", "CLUBS", "HEARTS"}

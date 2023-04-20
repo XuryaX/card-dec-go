@@ -3,6 +3,7 @@ package models
 import (
 	"database/sql/driver"
 	"encoding/json"
+	"fmt"
 )
 
 type Card struct {
@@ -24,5 +25,17 @@ func (c *Cards) Scan(value interface{}) error {
 	if value == nil {
 		return nil
 	}
-	return json.Unmarshal(value.([]byte), c)
+
+	var data []byte
+
+	switch v := value.(type) {
+	case []byte:
+		data = v
+	case string:
+		data = []byte(v)
+	default:
+		return fmt.Errorf("unsupported type for Scan: %T", value)
+	}
+
+	return json.Unmarshal(data, c)
 }

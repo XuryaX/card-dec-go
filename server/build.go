@@ -1,6 +1,6 @@
 package server
 
-func Build() {
+func Migrate() {
 	database := migrateDB()
 
 	defer func() {

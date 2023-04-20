@@ -10,11 +10,11 @@ import (
 func main() {
 	rootCmd := &cobra.Command{Use: "card-dec-go"}
 
-	buildCmd := &cobra.Command{
-		Use:   "build",
-		Short: "Builds the models and migrates them to the database",
+	migrateCmd := &cobra.Command{
+		Use:   "migrate",
+		Short: "Migrates the models to the database",
 		Run: func(cmd *cobra.Command, args []string) {
-			server.Build()
+			server.Migrate()
 			log.Println("Building models and migrating to the database...")
 		},
 	}
@@ -28,7 +28,7 @@ func main() {
 		},
 	}
 
-	rootCmd.AddCommand(buildCmd)
+	rootCmd.AddCommand(migrateCmd)
 	rootCmd.AddCommand(runCmd)
 
 	if err := rootCmd.Execute(); err != nil {

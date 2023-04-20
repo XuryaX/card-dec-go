@@ -28,11 +28,71 @@ Ensure GoLang is installed on your system.
 
 ### Ubuntu
 
-{Fill the required steps}
+
+1. Update the packages index and install the required dependencies:
+
+```sh
+sudo apt update
+sudo apt install wget
+```
+
+2. Download the Go binary:
+
+```
+wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz
+```
+
+Note: Replace the URL with the latest version available from the official Go website.
+
+3. Extract the tarball:
+
+```
+sudo tar -C /usr/local -xzf go1.17.1.linux-amd64.tar.gz
+```
+
+4. Add the Go binary to your PATH:
+
+```
+echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
+```
+
+5. Source the ~/.profile file to apply the changes:
+
+```
+source ~/.profile
+```
+
+6. Verify the installation by checking the Go version:
+
+```
+go version
+```
 
 ### macOS
 
-{Fill in the required steps using brew incl. brew install steps.}
+1. Install [Homebrew](https://brew.sh/) if it's not already installed on your system:
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+2. Update Homebrew:
+
+```
+brew update
+```
+
+3. Install Go using Homebrew:
+
+```
+brew install go
+```
+
+4. Verify the installation by checking the Go version:
+
+```
+go version
+```
 
 ## Build and Run
 

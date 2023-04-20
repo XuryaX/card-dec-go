@@ -1,6 +1,7 @@
 build:
 	go mod download
-	go run cmd/main.go build
+	go build -o ./bin/app.bin ./cmd
+	go run cmd/main.go migrate
 
 run:
 	go run cmd/main.go run

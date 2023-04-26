@@ -179,3 +179,74 @@ This would be expensive in terms of Database Size + Operational Execution Time f
 ### Database Choice
 
 The database used in the project is SQLite because it's easier to run this on localhost. To productionize this, we can easily extend the DAL Layer for another Database.
+
+### API Signatures
+
+# Create a new deck
+POST `/deck/new?shuffled=true&cards=2C,10H,5H`
+
+*Request Body*
+None
+
+*Response*
+```
+{
+    "deck_id": "string",
+    "remaininf": 52,
+    "shuffled": true
+}
+```
+
+# Open Deck
+
+Endpoint: `GET /deck/:id`
+
+Parameters:
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `id` | `string` | The ID of the deck to open |
+
+Response:
+
+```
+{
+    "deck_id": "string",
+    "shuffled": boolean,
+    "remaining": int,
+    "cards": [
+        {
+            "value": string,
+            "suit": string,
+            "code": string
+        }
+    ]
+}
+```
+
+### Draw Card
+
+Endpoint: `POST /deck/:id/draw?count=1`
+
+Parameters:
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `id` | `string` | The ID of the deck to draw a card from |
+
+Request Body:
+```
+{}
+```
+
+Response:
+```
+{
+  "cards": [
+    {
+      "value" : "string",
+      "card" : "string",
+      "suit": "string"
+    }
+  ]
+}

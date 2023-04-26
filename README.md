@@ -20,6 +20,11 @@ A versatile Card Deck Service implemented in Go and SQLite, designed to be used 
   - [Database Design](#database-design)
   - [Database Choice](#database-choice)
 
+- [API Signatures](#api-signatures)
+  - [Create a new deck](#create-a-new-deck)
+  - [Open Deck](#open-deck)
+  - [Draw Card](#draw-card)
+
 ## Prerequisites
 
 Ensure GoLang is installed on your system.
